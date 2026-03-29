@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yourdomain.com'), // 🔥 replace with your real domain
+  metadataBase: new URL('https://www.nafij.xyz/'), // 🔥 replace with your real domain
 
   title: 'Shopify Expert Developer | Custom Store Development & Optimization',
   description:
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: 'Shopify Expert Developer | Custom Store Development',
     description: 'Build high-converting Shopify stores with a certified expert',
     type: 'website',
-    url: 'https://yourdomain.com',
+    url: 'https://www.nafij.xyz/',
     images: [
       {
         url: '/nafij-og.png', // ✅ your OG image
