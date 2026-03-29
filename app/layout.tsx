@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -15,15 +15,37 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://yourdomain.com'), // 🔥 replace with your real domain
+
   title: 'Shopify Expert Developer | Custom Store Development & Optimization',
-  description: 'Award-winning Shopify developer specializing in custom store development, theme customization, and conversion rate optimization. Build your high-converting eCommerce store today.',
+  description:
+    'Award-winning Shopify developer specializing in custom store development, theme customization, and conversion rate optimization. Build your high-converting eCommerce store today.',
   generator: 'v0.app',
-  keywords: 'Shopify Developer, Shopify Expert, Custom Shopify Development, Shopify Theme Customization, eCommerce',
+  keywords:
+    'Shopify Developer, Shopify Expert, Custom Shopify Development, Shopify Theme Customization, eCommerce',
+
   openGraph: {
     title: 'Shopify Expert Developer | Custom Store Development',
     description: 'Build high-converting Shopify stores with a certified expert',
     type: 'website',
+    url: 'https://yourdomain.com',
+    images: [
+      {
+        url: '/nafij-og.png', // ✅ your OG image
+        width: 1200,
+        height: 630,
+        alt: 'Shopify Expert Developer Nafij Islam',
+      },
+    ],
   },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shopify Expert Developer | Custom Store Development',
+    description: 'Build high-converting Shopify stores with a certified expert',
+    images: ['/nafij-og.png'], // ✅ same image for Twitter
+  },
+
   icons: {
     icon: [
       {
