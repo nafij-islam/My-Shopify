@@ -63,14 +63,14 @@ export default function ContactPage() {
               {
                 icon: Mail,
                 title: 'Email',
-                info: 'contact@shopifyexpert.com',
+                info: 'nafij.cms.2026@gmail.com',
                 details: 'Response within 24 hours',
               },
               {
                 icon: Phone,
                 title: 'Phone',
-                info: '+1 (555) 123-4567',
-                details: 'Available Mon-Fri 9AM-6PM EST',
+                info: '+8801633003462',
+                details: 'Available Mon-Fri 12AM-10PM EST',
               },
               {
                 icon: MapPin,

@@ -5,37 +5,57 @@ import { Check, Layers, Zap, BarChart3 } from 'lucide-react'
 const SERVICES = [
   {
     id: 1,
-    title: 'Custom Shopify Store Development',
-    description: 'Build from scratch or migrate to a custom, fully optimized Shopify store tailored to your business needs.',
-    features: ['Custom theme development', 'Full store setup', 'Payment gateway integration', 'Performance optimization'],
-    price: 'Custom Quote',
+    title: 'Starter Package',
+    description: 'Perfect for small businesses or beginners looking to launch a basic Shopify store.',
+    features: [
+      'Basic Shopify store setup',
+      'Free theme installation',
+      'Essential pages setup',
+      'Payment gateway integration',
+    ],
+    price: '$80',
     icon: Layers,
   },
   {
     id: 2,
-    title: 'Theme Design & Customization',
-    description: 'Transform your store with stunning custom designs that reflect your brand and boost conversions.',
-    features: ['UI/UX design', 'Custom CSS/JavaScript', 'Responsive design', 'Brand integration'],
-    price: 'From $2,500',
+    title: 'Growth Package',
+    description: 'Ideal for growing brands that need customization and improved design.',
+    features: [
+      'Theme customization',
+      'Responsive design',
+      'Custom sections & layout',
+      'Basic SEO optimization',
+    ],
+    price: '$150',
     icon: Zap,
   },
   {
     id: 3,
-    title: 'Store Redesign & UX Improvement',
-    description: 'Modernize your existing store with improved user experience and conversion-focused design updates.',
-    features: ['UX audit', 'Design improvements', 'Mobile optimization', 'A/B testing setup'],
-    price: 'From $1,500',
+    title: 'Professional Package',
+    description: 'Best for businesses aiming for a high-converting and optimized Shopify store.',
+    features: [
+      'Advanced UI/UX design',
+      'Speed optimization',
+      'Conversion-focused layout',
+      'App integration & setup',
+    ],
+    price: '$300',
     icon: BarChart3,
   },
   {
     id: 4,
-    title: 'Speed & SEO Optimization',
-    description: 'Maximize your store&apos;s performance and search rankings with advanced optimization techniques.',
-    features: ['Performance audit', 'Code optimization', 'Image optimization', 'SEO implementation'],
-    price: 'From $1,000',
+    title: 'Premium Package',
+    description: 'Complete custom Shopify solution tailored for scaling and high performance.',
+    features: [
+      'Custom theme development',
+      'Full store customization',
+      'Advanced SEO & performance optimization',
+      'Priority support',
+    ],
+    price: '$550',
     icon: Zap,
   },
-]
+];
 
 export default function Services() {
   return (
