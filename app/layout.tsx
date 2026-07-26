@@ -113,7 +113,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         {/* JSON-LD Structured Data */}
         <script
