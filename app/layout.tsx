@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SmoothScroll } from '@/components/smooth-scroll'
 import './globals.css'
 
 const geistSans = Geist({
@@ -119,7 +120,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
         <Analytics />
       </body>
     </html>
