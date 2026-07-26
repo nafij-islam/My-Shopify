@@ -1,6 +1,6 @@
 'use client'
 
-import { Code2, Zap, TrendingUp, Gauge, Eye, Laptop, Server, Layers, Star } from 'lucide-react'
+import { Code2, Zap, Eye, Laptop, Server, Layers, Star, ChevronsDown } from 'lucide-react'
 
 const SKILLS = [
   {
@@ -35,18 +35,12 @@ const SKILLS = [
   },
   {
     id: 6,
-    title: 'Store Speed Optimization',
-    description: 'Lightning-fast loading speeds for better conversion lift and Google Core Web Vitals.',
-    icon: Gauge,
+    title: 'Smooth Scrolling & UX',
+    description: 'Configuring seamless, responsive single-page smooth scrolling and modern interactive animations.',
+    icon: ChevronsDown,
   },
   {
     id: 7,
-    title: 'CRO & Analytics',
-    description: 'Conversion rate optimization audit, split testing, and Google Analytics integrations.',
-    icon: TrendingUp,
-  },
-  {
-    id: 8,
     title: 'Shopify SEO',
     description: 'On-page SEO, schema markup, and content strategy for ranking eCommerce stores at the top.',
     icon: Eye,
