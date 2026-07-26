@@ -1,42 +1,54 @@
 'use client'
 
-import { Code2, Zap, TrendingUp, Gauge, Eye } from 'lucide-react'
+import { Code2, Zap, TrendingUp, Gauge, Eye, Laptop, Server, Layers, Star } from 'lucide-react'
 
 const SKILLS = [
   {
     id: 1,
-    title: 'Shopify Theme Customization',
-    description: 'Tailored designs that match your brand identity and drive conversions',
-    icon: Code2,
+    title: 'Shopify Expert Partner',
+    description: 'Bespoke custom theme development, Liquid programming, and premium eCommerce integrations.',
+    icon: Star,
   },
   {
     id: 2,
-    title: 'Liquid Programming',
-    description: 'Advanced Shopify Liquid code for custom functionality and features',
-    icon: Zap,
+    title: 'Frontend: React & Next.js',
+    description: 'Modern, highly responsive, SEO-friendly user interfaces and headless store storefronts.',
+    icon: Laptop,
   },
   {
     id: 3,
-    title: 'Shopify App Integration',
-    description: 'Seamless integration of tools to enhance store capabilities',
-    icon: Code2,
+    title: 'Backend: Node.js & APIs',
+    description: 'Secure, high-performance API endpoints, custom apps, database management, and integrations.',
+    icon: Server,
   },
   {
     id: 4,
-    title: 'Store Speed Optimization',
-    description: 'Lightning-fast load times for better SEO and user experience',
-    icon: Gauge,
+    title: 'Bubble.io: No-Code Dev',
+    description: 'Rapid development and deployment of premium web apps and SaaS tools using Bubble.io.',
+    icon: Layers,
   },
   {
     id: 5,
-    title: 'CRO & Analytics',
-    description: 'Data-driven optimization strategies to maximize revenue',
-    icon: TrendingUp,
+    title: 'Liquid Programming',
+    description: 'Advanced Shopify Liquid code for tailored customer experiences and checkout scripts.',
+    icon: Zap,
   },
   {
     id: 6,
+    title: 'Store Speed Optimization',
+    description: 'Lightning-fast loading speeds for better conversion lift and Google Core Web Vitals.',
+    icon: Gauge,
+  },
+  {
+    id: 7,
+    title: 'CRO & Analytics',
+    description: 'Conversion rate optimization audit, split testing, and Google Analytics integrations.',
+    icon: TrendingUp,
+  },
+  {
+    id: 8,
     title: 'Shopify SEO',
-    description: 'Complete SEO optimization to improve search rankings',
+    description: 'On-page SEO, schema markup, and content strategy for ranking eCommerce stores at the top.',
     icon: Eye,
   },
 ]

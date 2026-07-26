@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,8 +17,35 @@ export default function Navbar() {
     }
 
     window.addEventListener('scroll', handleScroll)
+
+    if (pathname === '/') {
+      const sections = ['home', 'skills', 'services', 'projects', 'testimonials']
+      const observers = sections.map((id) => {
+        const el = document.getElementById(id)
+        if (!el) return null
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setActiveSection(id)
+            }
+          },
+          { threshold: 0.2, rootMargin: '-20% 0px -20% 0px' }
+        )
+        observer.observe(el)
+        return { observer, el }
+      })
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+        observers.forEach((obs) => {
+          if (obs) obs.observer.unobserve(obs.el)
+        })
+      }
+    }
+
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [pathname])
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId)
@@ -51,19 +80,28 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
-            {['home', 'skills', 'services', 'projects', 'testimonials'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className={`px-4 py-2 rounded-lg smooth-transition capitalize ${
-                  activeSection === item
-                    ? 'bg-primary/20 text-primary'
-                    : 'text-gray-300 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {item}
-              </button>
-            ))}
+            {['home', 'skills', 'services', 'projects', 'testimonials'].map((item) => {
+              const targetPath = item === 'home' ? '/' : `/#${item}`
+              return (
+                <Link
+                  key={item}
+                  href={targetPath}
+                  onClick={(e) => {
+                    if (pathname === '/') {
+                      e.preventDefault()
+                      scrollToSection(item)
+                    }
+                  }}
+                  className={`px-4 py-2 rounded-lg smooth-transition capitalize cursor-pointer ${
+                    activeSection === item
+                      ? 'bg-primary/20 text-primary font-semibold'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {item}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA Button - Desktop */}
@@ -90,22 +128,34 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-            {['home', 'skills', 'services', 'projects', 'testimonials'].map((item, idx) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className={`block w-full text-left px-4 py-2 rounded-lg capitalize smooth-transition stagger-child ${
-                  activeSection === item
-                    ? 'bg-primary/20 text-primary'
-                    : 'text-gray-300 hover:text-white hover:bg-white/5'
-                }`}
-                style={{ animationDelay: `${idx * 0.05}s` }}
-              >
-                {item}
-              </button>
-            ))}
+            {['home', 'skills', 'services', 'projects', 'testimonials'].map((item, idx) => {
+              const targetPath = item === 'home' ? '/' : `/#${item}`
+              return (
+                <Link
+                  key={item}
+                  href={targetPath}
+                  onClick={(e) => {
+                    if (pathname === '/') {
+                      e.preventDefault()
+                      scrollToSection(item)
+                    } else {
+                      setIsOpen(false)
+                    }
+                  }}
+                  className={`block w-full text-left px-4 py-2 rounded-lg capitalize smooth-transition stagger-child cursor-pointer ${
+                    activeSection === item
+                      ? 'bg-primary/20 text-primary font-semibold'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                  }`}
+                  style={{ animationDelay: `${idx * 0.05}s` }}
+                >
+                  {item}
+                </Link>
+              )
+            })}
             <Link
               href="/contact"
+              onClick={() => setIsOpen(false)}
               className="block px-4 py-2 rounded-lg gradient-cyan-purple text-black font-semibold text-center btn-glow smooth-transition stagger-child"
             >
               Hire Me

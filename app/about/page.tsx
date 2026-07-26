@@ -44,10 +44,10 @@ export default function AboutPage() {
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
               <span className="text-white">About </span>
-              <span className="gradient-text">Your Developer</span>
+              <span className="gradient-text">Nafij Islam</span>
             </h1>
             <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
-              A passionate Shopify expert dedicated to transforming eCommerce businesses through innovative solutions and data-driven strategies.
+              Nafij Islam is a passionate Shopify expert dedicated to transforming eCommerce businesses through innovative solutions and data-driven strategies.
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-gray-400 leading-relaxed">
                 <p>
-                  I started my eCommerce journey in 2014 as a freelance developer trying to help a friend set up their online store. What began as a small project quickly evolved into a passion for creating exceptional digital experiences.
+                  I am <strong>Nafij Islam</strong>, and I started my eCommerce journey in 2014 as a freelance developer trying to help a friend set up their online store. What began as a small project quickly evolved into a passion for creating exceptional digital experiences.
                 </p>
                 <p>
                   Over the past decade, I&apos;ve worked with startups and established brands, learning what truly drives conversions and customer loyalty. Every project taught me something new about the intersection of design, performance, and business strategy.
@@ -86,6 +86,66 @@ export default function AboutPage() {
                 💻
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* My Network & Portals Section */}
+      <section className="relative py-16 overflow-hidden border-t border-primary/20 bg-black/10">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+            <span className="text-white">Explore My </span>
+            <span className="gradient-text">Web Network</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Nafij.com',
+                description: 'My primary hub, showcasing complete portfolio highlights, case studies, and professional consulting services.',
+                url: 'https://nafij.com',
+                tag: 'Main Site'
+              },
+              {
+                title: 'Nafij.bro.bd',
+                description: 'A personal portal featuring developer insights, tech reviews, blogs, and community integrations.',
+                url: 'https://nafij.bro.bd',
+                tag: 'Personal Portal'
+              },
+              {
+                title: 'Nafij.pro.bd',
+                description: 'A dedicated workspace showcasing professional custom projects, apps integrations, and client portals.',
+                url: 'https://nafij.pro.bd',
+                tag: 'Professional Portal'
+              }
+            ].map((site) => (
+              <a
+                key={site.title}
+                href={site.url}
+                target="_blank"
+                rel="noopener noreferrer me"
+                className="group relative p-6 rounded-xl glass-effect border border-primary/20 hover:border-primary/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 flex flex-col justify-between"
+              >
+                <div>
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-primary/25 text-primary mb-4">
+                    {site.tag}
+                  </span>
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                    {site.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                    {site.description}
+                  </p>
+                </div>
+                <div className="text-primary font-semibold text-sm flex items-center group-hover:underline">
+                  Visit Site <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>

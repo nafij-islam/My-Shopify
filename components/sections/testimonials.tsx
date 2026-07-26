@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 
 const TESTIMONIALS = [
@@ -55,23 +56,36 @@ const TESTIMONIALS = [
 ]
 
 export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' })
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length)
-  }
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
 
-  const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
-  }
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
-  const visibleCount = 3
-  const visibleTestimonials = []
-  for (let i = 0; i < visibleCount; i++) {
-    visibleTestimonials.push(
-      TESTIMONIALS[(currentIndex + i) % TESTIMONIALS.length]
-    )
-  }
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index)
+  }, [emblaApi])
+
+  const onSelect = useCallback((emblaApi: any) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    setScrollSnaps(emblaApi.scrollSnapList())
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
+    
+    // Trigger initial select
+    onSelect(emblaApi)
+  }, [emblaApi, onSelect])
 
   return (
     <section id="testimonials" className="relative py-20 overflow-hidden">
@@ -94,72 +108,79 @@ export default function Testimonials() {
 
         {/* Testimonials Carousel */}
         <div className="relative">
-          {/* Cards Container */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleTestimonials.map(({ id, name, role, feedback, rating, image }) => (
-              <div
-                key={id}
-                className="group p-6 rounded-xl glass-effect border border-primary/20 hover:border-primary/60 card-hover flex flex-col stagger-child animate-in fade-in slide-in-from-bottom-4"
-              >
-                {/* Rating */}
-                <div className="flex items-center space-x-1 mb-4">
-                  {Array.from({ length: rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className="fill-primary text-primary group-hover:animate-bounce"
-                      style={{ animationDelay: `${i * 0.1}s`, animationDuration: '0.6s' }}
-                    />
-                  ))}
-                </div>
+          {/* Carousel Viewport */}
+          <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
+            {/* Carousel Container */}
+            <div className="flex -ml-6">
+              {TESTIMONIALS.map(({ id, name, role, feedback, rating, image }) => (
+                <div
+                  key={id}
+                  className="flex-[0_0_100%] min-w-0 pl-6 md:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
+                >
+                  <div className="group h-full p-6 rounded-xl glass-effect border border-primary/20 hover:border-primary/60 card-hover flex flex-col justify-between select-none">
+                    <div>
+                      {/* Rating */}
+                      <div className="flex items-center space-x-1 mb-4">
+                        {Array.from({ length: rating }).map((_, i) => (
+                          <Star
+                            key={i}
+                            size={18}
+                            className="fill-primary text-primary group-hover:animate-bounce"
+                            style={{ animationDelay: `${i * 0.1}s`, animationDuration: '0.6s' }}
+                          />
+                        ))}
+                      </div>
 
-                {/* Feedback */}
-                <p className="text-gray-300 mb-6 leading-relaxed flex-grow italic smooth-transition">
-                  &quot;{feedback}&quot;
-                </p>
+                      {/* Feedback */}
+                      <p className="text-gray-300 mb-6 leading-relaxed italic smooth-transition">
+                        &quot;{feedback}&quot;
+                      </p>
+                    </div>
 
-                {/* Author */}
-                <div className="flex items-center space-x-3 pt-4 border-t border-primary/20">
-                  <div className="w-12 h-12 rounded-full bg-gradient-cyan-purple flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 smooth-transition">
-                    {image}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-white smooth-transition group-hover:text-primary">{name}</p>
-                    <p className="text-sm text-gray-400">{role}</p>
+                    {/* Author */}
+                    <div className="flex items-center space-x-3 pt-4 border-t border-primary/20">
+                      <div className="w-12 h-12 rounded-full bg-gradient-cyan-purple flex items-center justify-center text-xl flex-shrink-0 group-hover:scale-110 smooth-transition">
+                        {image}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-white smooth-transition group-hover:text-primary">{name}</p>
+                        <p className="text-sm text-gray-400">{role}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Navigation Buttons */}
           <div className="flex items-center justify-between mt-10 fade-in-up">
             <div className="flex space-x-2">
-              {TESTIMONIALS.map((_, idx) => (
+              {scrollSnaps.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full smooth-transition ${
-                    idx >= currentIndex && idx < currentIndex + visibleCount
+                  onClick={() => scrollTo(idx)}
+                  className={`h-2 rounded-full smooth-transition cursor-pointer ${
+                    idx === selectedIndex
                       ? 'bg-primary w-8 pulse-glow'
                       : 'bg-gray-600 hover:bg-gray-400 w-2'
                   }`}
-                  aria-label={`Go to testimonial ${idx + 1}`}
+                  aria-label={`Go to slide ${idx + 1}`}
                 />
               ))}
             </div>
 
             <div className="flex gap-3">
               <button
-                onClick={prev}
-                className="p-2 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 btn-glow"
+                onClick={scrollPrev}
+                className="p-2 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 btn-glow cursor-pointer"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft size={24} className="smooth-transition group-hover:-translate-x-1" />
               </button>
               <button
-                onClick={next}
-                className="p-2 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 btn-glow"
+                onClick={scrollNext}
+                className="p-2 rounded-lg border border-primary/30 text-primary hover:bg-primary/10 btn-glow cursor-pointer"
                 aria-label="Next testimonial"
               >
                 <ChevronRight size={24} className="smooth-transition group-hover:translate-x-1" />

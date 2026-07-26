@@ -3,8 +3,14 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ['latin'] })
-const _geistMono = Geist_Mono({ subsets: ['latin'] })
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -15,40 +21,53 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.nafij.xyz'),
+  metadataBase: new URL('https://nafij.com'),
 
-  title:
-    'Shopify Expert Developer | Custom Store Development & Optimization',
+  title: {
+    default: 'Nafij Islam | Shopify Expert Developer & eCommerce Consultant',
+    template: '%s | Nafij Islam'
+  },
   description:
-    'Award-winning Shopify developer specializing in custom store development, theme customization, and conversion rate optimization. Build your high-converting eCommerce store today.',
+    'Nafij Islam is a professional Shopify Expert Developer specializing in custom store development, theme customization, speed optimization, and eCommerce growth. Build your high-converting store today.',
   generator: 'v0.app',
-  keywords:
-    'Shopify Developer, Shopify Expert, Custom Shopify Development, Shopify Theme Customization, eCommerce',
+  keywords: [
+    'Nafij Islam',
+    'Nafij',
+    'Shopify Developer',
+    'Shopify Expert',
+    'Nafij Shopify',
+    'Nafij Islam Shopify',
+    'Shopify Developer Bangladesh',
+    'Custom Shopify Store',
+    'eCommerce Developer',
+    'Liquid Programming',
+    'Shopify Speed Optimization'
+  ],
 
   openGraph: {
-    title: 'Shopify Expert Developer | Custom Store Development',
+    title: 'Nafij Islam | Shopify Expert Developer & Consultant',
     description:
-      'Build high-converting Shopify stores with a certified expert',
+      'Build high-converting Shopify stores with certified expert Nafij Islam. Customized Shopify solutions, Liquid theme development, and speed optimization.',
     type: 'website',
-    url: 'https://www.nafij.xyz',
-    siteName: 'Nafij Islam',
+    url: 'https://nafij.com',
+    siteName: 'Nafij Islam Portfolio',
     images: [
       {
-        url: 'https://www.nafij.xyz/nafij-og.png', // 🔥 FULL URL (FIXED)
+        url: 'https://nafij.com/nafij-og.png',
         width: 1200,
         height: 630,
-        alt: 'Shopify Expert Developer Nafij Islam',
+        alt: 'Nafij Islam - Shopify Expert Developer',
       },
     ],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Shopify Expert Developer | Custom Store Development',
+    title: 'Nafij Islam | Shopify Expert Developer & Consultant',
     description:
-      'Build high-converting Shopify stores with a certified expert',
-    images: ['https://www.nafij.xyz/nafij-og.png'], // 🔥 FULL URL (FIXED)
-    creator: '@yourtwitterhandle', // optional
+      'Build high-converting Shopify stores with certified expert Nafij Islam.',
+    images: ['https://nafij.com/nafij-og.png'],
+    creator: '@nafij_islam',
   },
 
   icons: {
@@ -75,9 +94,31 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nafij Islam",
+    "alternateName": ["Nafij", "Nafij Islam Shopify"],
+    "url": "https://nafij.com",
+    "image": "https://nafij.com/Nafij-islam.png",
+    "sameAs": [
+      "https://www.facebook.com/nafijislam99/",
+      "https://github.com/nafij-islam",
+      "https://nafij.bro.bd",
+      "https://nafij.pro.bd"
+    ],
+    "jobTitle": "Shopify Expert Developer",
+    "description": "Nafij Islam is a professional Shopify Expert Developer specializing in custom store development, theme customization, speed optimization, and eCommerce growth."
+  }
+
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className="font-sans antialiased">
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <Analytics />
       </body>
