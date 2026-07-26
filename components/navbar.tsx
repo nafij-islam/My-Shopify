@@ -68,14 +68,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center space-x-2 group"
+            className="flex items-center space-x-2 group cursor-pointer"
           >
-            <div className="relative w-8 h-8 rounded-lg glass-effect flex items-center justify-center">
-              <span className="text-lg font-bold gradient-text">S</span>
+            <div className="relative px-3.5 py-1 rounded-lg glass-effect flex items-center justify-center border border-primary/30 group-hover:border-primary/60 smooth-transition">
+              <span className="text-lg font-extrabold tracking-widest gradient-text font-mono">NAFIJ</span>
             </div>
-            <span className="hidden sm:block text-xl font-bold text-white">
-              Shopify <span className="text-primary">Expert</span>
-            </span>
           </Link>
 
           {/* Desktop Menu */}

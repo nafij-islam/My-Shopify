@@ -14,12 +14,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-lg glass-effect flex items-center justify-center">
-                <span className="text-lg font-bold gradient-text">S</span>
+              <div className="relative px-3.5 py-1 rounded-lg glass-effect flex items-center justify-center border border-primary/30">
+                <span className="text-lg font-extrabold tracking-widest gradient-text font-mono">NAFIJ</span>
               </div>
-              <span className="text-lg font-bold text-white">
-                Shopify <span className="text-primary">Expert</span>
-              </span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Building high-converting Shopify stores that drive revenue and growth.
